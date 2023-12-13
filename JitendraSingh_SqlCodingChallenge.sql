@@ -1,7 +1,7 @@
 --NAME : JITENDRA SINGH
 
 --Coding Challenge SQL
---Virtual Art Gallery Shema DDL and DML
+--Virtual Art Gallery Schema DDL and DML
 
 CREATE TABLE Artists (
  ArtistID INT PRIMARY KEY,
