@@ -1,9 +1,9 @@
 
--- Carrer Hub Coding Challenge
+-- Career Hub Coding Challenge
 --Name - Jitendra Singh
 
 
---1 Provide a SQL script that initializes the database for the Job Board scenario “CareerHub”. 
+--1 Provide a SQL script that initializes the database for the Job Board scenario â€œCareerHubâ€. 
 create database CareerHub;
 use CareerHub;
 
@@ -153,9 +153,15 @@ GROUP BY c.CompanyName
 
 --9. Write an SQL query to identify the company that has posted the most job listings. Display the 
 --company name along with the count of job listings they have posted. Handle ties if multiple 
---companies have the same maximum count.SELECT TOP 1 c.CompanyName,COUNT(j.JobID) AS JobCount FROM Companies cLEFT JOIN Jobs j ON c.CompanyID = j.CompanyIDGROUP BY c.CompanyName ORDER BY JobCount DESC--10. Find the applicants who have applied for positions in companies located in 'CityX' and have at 
+--companies have the same maximum count.
+SELECT TOP 1 c.CompanyName,COUNT(j.JobID) AS JobCount FROM Companies c
+LEFT JOIN Jobs j ON c.CompanyID = j.CompanyID
+GROUP BY c.CompanyName ORDER BY JobCount DESC
+
+--10. Find the applicants who have applied for positions in companies located in 'CityX' and have at 
 --least 3 years of experience.	
---Column 'Experience' was not present in Applicants tableALTER TABLE Applicants
+--Column 'Experience' was not present in Applicants table
+ALTER TABLE Applicants
 ADD Experience INT;
 
 UPDATE Applicants
@@ -163,8 +169,15 @@ SET Experience = 10
 WHERE ApplicantID = 202; 
 
 --Let CityX be 'Chennai'
-SELECT a.ApplicantID,a.FirstName FROM Applicants aJOIN Applications ap ON a.ApplicantID = ap.ApplicantIDJOIN Jobs j ON ap.JobID = j.JobIDJOIN Companies c ON j.CompanyID = c.CompanyIDWHERE c.Location = 'Chennai' AND a.Experience >= 3;
---11. Retrieve a list of distinct job titles with salaries between $60,000 and $80,000
+SELECT a.ApplicantID,a.FirstName FROM Applicants a
+JOIN Applications ap ON a.ApplicantID = ap.ApplicantID
+JOIN Jobs j ON ap.JobID = j.JobID
+JOIN Companies c ON j.CompanyID = c.CompanyID
+WHERE c.Location = 'Chennai' AND a.Experience >= 3;
+
+
+
+--11. Retrieve a list of distinct job titles with salaries between $60,000 and $80,000
 SELECT DISTINCT JobTitle FROM Jobs 
 WHERE Salary BETWEEN 60000 AND 80000
 
@@ -217,7 +230,8 @@ FROM Jobs
 WHERE JobTitle LIKE '%Developer%' OR JobTitle LIKE '%Engineer%';
 
 --19. Retrieve a list of applicants and the jobs they have applied for, including those who have not 
---applied and jobs without applicants.SELECT A.FirstName, A.LastName, J.JobTitle FROM Applicants A
+--applied and jobs without applicants.
+SELECT A.FirstName, A.LastName, J.JobTitle FROM Applicants A
 LEFT JOIN Applications AP ON A.ApplicantID = AP.ApplicantID
 LEFT JOIN Jobs J ON AP.JobID = J.JobID;
 
